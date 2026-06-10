@@ -309,15 +309,17 @@ h2 {
   position: relative;
   z-index: 1;
   display: block;
-  width: min(78%, 250px);
-  height: auto;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  border-radius: 4px;
-  background: #fff8eb;
+  width: min(82%, 260px);
+  border-radius: 12px;
   box-shadow: 0 10px 22px rgba(72, 47, 20, 0.16);
-  filter: saturate(1.04) contrast(1.05) brightness(1.04);
   cursor: zoom-in;
   transition: transform 0.18s ease;
+}
+
+.diagram-svg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .diagram-image:hover,
@@ -359,12 +361,17 @@ h2 {
   text-align: center;
 }
 
-.lightbox img {
-  width: min(80vw, 520px);
+.lightbox-media {
+  margin: 0 auto;
+  width: min(80vw, 420px);
+}
+
+.lightbox-media svg {
+  display: block;
+  width: 100%;
+  height: auto;
   max-height: 76vh;
-  object-fit: contain;
-  border-radius: 6px;
-  image-rendering: auto;
+  border-radius: 10px;
 }
 
 .lightbox figcaption {
