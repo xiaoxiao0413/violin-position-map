@@ -125,7 +125,6 @@ const KEY_SIGNATURES = {
 const filters = document.querySelector("#filters");
 const tonicSelect = document.querySelector("#tonic");
 const resultTitle = document.querySelector("#result-title");
-const formulaNote = document.querySelector("#formula-note");
 const results = document.querySelector("#results");
 const resetButton = document.querySelector("#reset");
 
@@ -460,7 +459,6 @@ function render() {
   resultTitle.textContent = tonicSelect.value === "all"
     ? `全部调 · All Keys · ${mode.label}`
     : `${keys[0] ? keyDisplayLabel(keys[0], modeId) : ""} ${mode.label}`;
-  formulaNote.textContent = "";
   results.dataset.layout = keys.length === 1 ? "single" : "multi";
   results.replaceChildren(...keys.map((key, index) => makeCard(key, index, mode, maxSemitone, scaleLength)));
   saveState();
