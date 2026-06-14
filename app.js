@@ -342,40 +342,6 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
     );
   }
 
-  const halfInner = (boardRight - boardLeft - 28) / 2;
-  const positions = [
-    { pos: 1, start: 0, end: 3 },
-    { pos: 2, start: 2, end: 5 },
-    { pos: 3, start: 4, end: 7 },
-    { pos: 4, start: 6, end: 9 },
-    { pos: 5, start: 8, end: 11 },
-    { pos: 6, start: 10, end: 13 },
-    { pos: 7, start: 12, end: 15 },
-    { pos: 8, start: 14, end: 17 },
-    { pos: 9, start: 16, end: 19 },
-    { pos: 10, start: 18, end: 21 },
-    { pos: 11, start: 20, end: 23 },
-    { pos: 12, start: 22, end: 24 },
-  ];
-  for (const p of positions) {
-    if (p.end > maxSemitone) continue;
-    const yStart = yFor(p.start);
-    const yEnd = yFor(p.end);
-    const isOdd = p.pos % 2 === 1;
-    const xBox = isOdd ? boardLeft + 14 : boardLeft + 14 + halfInner;
-    const yBox = yStart;
-    const boxH = yEnd - yStart;
-    const fill = isOdd ? "rgba(255,183,77,0.10)" : "rgba(255,112,67,0.10)";
-    const stroke = isOdd ? "rgba(255,183,77,0.55)" : "rgba(255,112,67,0.55)";
-    parts.push(
-      `<rect x="${xBox.toFixed(2)}" y="${yBox.toFixed(2)}" width="${halfInner.toFixed(2)}" height="${boxH.toFixed(2)}" rx="4" fill="${fill}" stroke="${stroke}" stroke-width="1.2"/>`
-    );
-    const labelColor = isOdd ? "#ffd18a" : "#ffb199";
-    parts.push(
-      `<text x="${(xBox + halfInner / 2).toFixed(2)}" y="${((yStart + yEnd) / 2 + 4).toFixed(2)}" text-anchor="middle" font-size="${Math.max(10, Math.min(14, boxH * 0.28)).toFixed(1)}" font-weight="900" fill="${labelColor}">${p.pos}</text>`
-    );
-  }
-
   for (const line of FINGER_LINES) {
     if (line.semitone > maxSemitone) continue;
 
