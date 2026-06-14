@@ -8,7 +8,7 @@ const LETTER_PC = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
 
 const MODES = {
   major: {
-    label: "大调",
+    label: "大调 · Major",
     formula: "{0, 2, 4, 5, 7, 9, 11}",
     intervals: [0, 2, 4, 5, 7, 9, 11],
     keys: [
@@ -30,7 +30,7 @@ const MODES = {
     ],
   },
   minor: {
-    label: "小调",
+    label: "小调 · Minor",
     formula: "{0, 2, 3, 5, 7, 8, 10}",
     intervals: [0, 2, 3, 5, 7, 8, 10],
     keys: [
@@ -184,7 +184,7 @@ function getMode() {
 
 function keySignatureText(key, modeId) {
   const count = KEY_SIGNATURES[modeId]?.[key.id] ?? 0;
-  if (count === 0) return "无";
+  if (count === 0) return "无 None";
   return count > 0 ? `${count}♯` : `${Math.abs(count)}♭`;
 }
 
@@ -198,7 +198,7 @@ function fillTonicOptions(modeId, preferredValue = "all") {
 
   const allOption = document.createElement("option");
   allOption.value = "all";
-  allOption.textContent = "全部调";
+  allOption.textContent = "全部调 · All Keys";
   tonicSelect.append(allOption);
 
   for (const key of keys) {
@@ -326,15 +326,15 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
 
   const parts = [];
   parts.push(`<svg class="fingerboard-svg" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" role="img">`);
-  parts.push(`<title>${escapeXml(keyDisplayLabel(key, modeId))}${mode.label}小提琴指板公式图</title>`);
+  parts.push(`<title>${escapeXml(keyDisplayLabel(key, modeId))}${mode.label}小提琴指板图 Violin Fingerboard Chart</title>`);
   parts.push(`<rect x="0" y="0" width="${width}" height="${height}" rx="18" fill="#fffdf6"/>`);
   parts.push(`<rect x="${boardLeft}" y="${boardTop}" width="${boardRight - boardLeft}" height="${boardBottom - boardTop}" rx="28" fill="#2a211d"/>`);
   parts.push(`<rect x="${boardLeft + 8}" y="${boardTop + 8}" width="${boardRight - boardLeft - 16}" height="${boardBottom - boardTop - 16}" rx="21" fill="#3b2c25"/>`);
   parts.push(`<line x1="${boardLeft + 12}" y1="${top}" x2="${boardRight - 12}" y2="${top}" stroke="#f4ead9" stroke-width="9" stroke-linecap="round"/>`);
   parts.push(`<line x1="${boardLeft + 16}" y1="${fingerboardEndY.toFixed(2)}" x2="${boardRight - 16}" y2="${fingerboardEndY.toFixed(2)}" stroke="#1c1512" stroke-width="5" stroke-linecap="round"/>`);
-  parts.push(`<text x="${boardLeft - 18}" y="${(boardTop + (boardBottom - boardTop) / 2).toFixed(2)}" text-anchor="middle" font-size="13" font-weight="900" fill="#4b3d32" transform="rotate(-90 ${boardLeft - 18} ${(boardTop + (boardBottom - boardTop) / 2).toFixed(2)})">指板</text>`);
+  parts.push(`<text x="${boardLeft - 18}" y="${(boardTop + (boardBottom - boardTop) / 2).toFixed(2)}" text-anchor="middle" font-size="13" font-weight="900" fill="#4b3d32" transform="rotate(-90 ${boardLeft - 18} ${(boardTop + (boardBottom - boardTop) / 2).toFixed(2)})">指板 Fingerboard</text>`);
   parts.push(`<line x1="${boardLeft + 10}" y1="${bridgeY}" x2="${boardRight - 10}" y2="${bridgeY}" stroke="#d9a45f" stroke-width="10" stroke-linecap="round"/>`);
-  parts.push(`<text x="${boardRight + 8}" y="${bridgeY + 4}" text-anchor="start" font-size="13" font-weight="900" fill="#8a5a20">琴码</text>`);
+  parts.push(`<text x="${boardRight + 8}" y="${bridgeY + 4}" text-anchor="start" font-size="13" font-weight="900" fill="#8a5a20">琴码 Bridge</text>`);
   for (let semitone = 0; semitone <= maxSemitone; semitone += 1) {
     const y = yFor(semitone);
     const strong = semitone % 12 === 0;
@@ -351,7 +351,7 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
       `<line x1="${boardLeft + 14}" y1="${y.toFixed(2)}" x2="${boardRight - 14}" y2="${y.toFixed(2)}" stroke="#f4bd27" stroke-opacity="0.92" stroke-width="2.5" stroke-dasharray="7 6"/>`
     );
     parts.push(`<rect x="${boardRight + 8}" y="${(y - 12).toFixed(2)}" width="42" height="24" rx="12" fill="#f4bd27" stroke="#9b6b20" stroke-width="1"/>`);
-    parts.push(`<text x="${boardRight + 29}" y="${(y + 4).toFixed(2)}" text-anchor="middle" font-size="12" font-weight="900" fill="#36240f">${line.finger}指</text>`);
+    parts.push(`<text x="${boardRight + 29}" y="${(y + 4).toFixed(2)}" text-anchor="middle" font-size="12" font-weight="900" fill="#36240f">${line.finger}</text>`);
   }
 
   for (let i = 0; i < STRINGS.length; i += 1) {
@@ -374,7 +374,7 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
 
       parts.push(`<g class="note-dot">`);
       parts.push(
-        `<title>${escapeXml(`${string.name}弦 ${marker.label}，音级${marker.degree}，n=${marker.semitone}，距上枕 ${marker.distanceMm.toFixed(1)} mm`)}</title>`
+        `<title>${escapeXml(`${string.name} String · ${marker.label}, Scale Degree ${marker.degree}, n=${marker.semitone}, ${marker.distanceMm.toFixed(1)} mm from Nut`)}</title>`
       );
       parts.push(
         `<circle cx="${x}" cy="${y.toFixed(2)}" r="${markerStyle.radius}" fill="${fill}" stroke="#fff7ec" stroke-width="1.8"/>`
@@ -411,8 +411,8 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
   media.innerHTML = makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength);
   media.tabIndex = 0;
   media.setAttribute("role", "img");
-  media.setAttribute("aria-label", `${key.label}${mode.label}小提琴指板公式图`);
-  media.title = "点击放大";
+  media.setAttribute("aria-label", `${key.label}${mode.label}小提琴指板图 Violin Fingerboard Chart`);
+  media.title = "点击放大 · Click to zoom";
   media.addEventListener("click", () => openLightbox(key, keyIndex, mode, maxSemitone, scaleLength));
   media.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -423,7 +423,7 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
 
   const meta = document.createElement("p");
   meta.className = "formula-meta";
-  meta.textContent = "完整指板";
+  meta.textContent = "";
 
   header.append(title, scaleLine);
   card.append(header, media, meta);
@@ -433,7 +433,7 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
 const lightbox = document.createElement("dialog");
 lightbox.className = "lightbox";
 lightbox.innerHTML =
-  '<button class="lightbox-close" type="button" aria-label="关闭">×</button>' +
+  '<button class="lightbox-close" type="button" aria-label="关闭 Close">×</button>' +
   '<figure><div class="lightbox-media"></div><figcaption></figcaption></figure>';
 document.body.append(lightbox);
 
@@ -458,9 +458,9 @@ function render() {
   const scaleLength = SCALE_LENGTH_DEFAULT;
 
   resultTitle.textContent = tonicSelect.value === "all"
-    ? `全部调 ${mode.label}`
+    ? `全部调 · All Keys · ${mode.label}`
     : `${keys[0] ? keyDisplayLabel(keys[0], modeId) : ""} ${mode.label}`;
-  formulaNote.textContent = "完整指板";
+  formulaNote.textContent = "";
   results.dataset.layout = keys.length === 1 ? "single" : "multi";
   results.replaceChildren(...keys.map((key, index) => makeCard(key, index, mode, maxSemitone, scaleLength)));
   saveState();

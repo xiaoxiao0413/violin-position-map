@@ -3,47 +3,47 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>小提琴公式指板图</title>
-    <link rel="stylesheet" href="styles.css?v=20260614-v3-1">
-    <script src="app.js?v=20260614-note-only" defer></script>
+    <title>小提琴指板图 · Violin Fingerboard Chart</title>
+    <link rel="stylesheet" href="styles.css?v=20260614-v4">
+    <script src="app.js?v=20260614-v4" defer></script>
   </head>
   <body>
     <main class="app-shell">
       <section class="control-panel" aria-labelledby="app-title">
         <div class="brand-block">
-          <p class="eyebrow">Violin Formula Map</p>
-          <h1 id="app-title">小提琴公式指板图</h1>
+          <p class="eyebrow">Violin Fingerboard Chart</p>
+          <h1 id="app-title">小提琴指板图</h1>
         </div>
 
         <form class="filters" id="filters">
           <fieldset class="field-group">
-            <legend>调式</legend>
-            <div class="segmented mode-segmented" role="radiogroup" aria-label="调式">
+            <legend>调式 · Mode</legend>
+            <div class="segmented mode-segmented" role="radiogroup" aria-label="调式 Mode">
               <label>
                 <input type="radio" name="mode" value="major" checked>
-                <span>大调</span>
+                <span>大调 Major</span>
               </label>
               <label>
                 <input type="radio" name="mode" value="minor">
-                <span>小调</span>
+                <span>小调 Minor</span>
               </label>
             </div>
           </fieldset>
 
           <label class="field">
-            <span>主音</span>
+            <span>主音 · Tonic</span>
             <select id="tonic" name="tonic"></select>
           </label>
 
-          <button class="reset-button" type="button" id="reset">重置</button>
+          <button class="reset-button" type="button" id="reset">重置 · Reset</button>
         </form>
       </section>
 
       <section class="result-panel" aria-live="polite">
         <div class="result-head">
           <div>
-            <p class="eyebrow">Formula Diagrams</p>
-            <h2 id="result-title">全部调 大调</h2>
+            <p class="eyebrow">Fingerboard Charts</p>
+            <h2 id="result-title">全部调 · All Keys · 大调 Major</h2>
           </div>
         </div>
 
