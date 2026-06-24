@@ -553,10 +553,10 @@ h2 {
   padding: 14px;
   overflow: hidden;
   background:
-    linear-gradient(var(--paper-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--paper-line) 1px, transparent 1px),
-    linear-gradient(180deg, #f7cf91, #eeb56b);
-  background-size: 22px 22px, 22px 22px, auto;
+    linear-gradient(rgba(11, 120, 135, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 120, 135, 0.08) 1px, transparent 1px),
+    #f8fbfd;
+  background-size: 18px 18px, 18px 18px, auto;
   cursor: zoom-in;
 }
 
@@ -616,7 +616,7 @@ h2 {
   background:
     linear-gradient(var(--paper-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--paper-line) 1px, transparent 1px),
-    linear-gradient(180deg, #f7cf91, #eeb56b);
+    linear-gradient(180deg, #fff2dd, #ffe7c4);
   background-size: 22px 22px, 22px 22px, auto;
 }
 
