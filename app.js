@@ -488,8 +488,11 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
 function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
   const modeId = getModeId();
   const scale = buildScale(key, mode);
+  const keyColor = KEY_COLORS[keyIndex % KEY_COLORS.length];
   const card = document.createElement("article");
   card.className = "diagram-card formula-card";
+  card.style.setProperty("--key-color", keyColor);
+  card.style.animationDelay = `${Math.min(keyIndex * 38, 480)}ms`;
 
   const header = document.createElement("div");
   header.className = "formula-card-head";
@@ -498,7 +501,13 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
   title.textContent = `${keyDisplayLabel(key, modeId)} ${modeLabel(modeId)}`;
 
   const scaleLine = document.createElement("p");
-  scaleLine.textContent = scale.map((note) => note.label).join(" ");
+  scaleLine.className = "scale-notes";
+  scale.forEach((note) => {
+    const span = document.createElement("span");
+    span.className = `scale-note${note.degree === 1 ? " scale-note-tonic" : ""}`;
+    span.textContent = note.label;
+    scaleLine.append(span);
+  });
 
   const media = document.createElement("div");
   media.className = "fingerboard-media";
@@ -528,6 +537,19 @@ lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox || event.target.closest(".lightbox-close")) lightbox.close();
 });
 
+document.querySelector(".fifths-svg").addEventListener("click", (event) => {
+  const text = event.target.closest("text[data-key]");
+  if (!text) return;
+  const key = text.dataset.key;
+  const isMajor = text.closest(".fifths-major") !== null;
+  const neededMode = isMajor ? "major" : "minor";
+  const modeInputs = filters.querySelectorAll('input[name="mode"]');
+  modeInputs.forEach((input) => { input.checked = input.value === neededMode; });
+  fillTonicOptions(neededMode, key);
+  fillPositionOptions(positionSelect.value);
+  render();
+});
+
 function openLightbox(key, keyIndex, mode, maxSemitone, scaleLength) {
   const media = lightbox.querySelector(".lightbox-media");
   media.innerHTML = makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength);
@@ -550,6 +572,15 @@ function render() {
     : `${keys[0] ? keyDisplayLabel(keys[0], modeId) : ""} ${modeLabel(modeId)}`) + positionSuffix;
   results.dataset.layout = keys.length === 1 ? "single" : "multi";
   results.replaceChildren(...keys.map((key, index) => makeCard(key, index, mode, maxSemitone, scaleLength)));
+
+  // Sync circle of fifths selected state
+  document.querySelectorAll(".fifths-svg text[data-key]").forEach((el) => el.removeAttribute("data-selected"));
+  if (tonicSelect.value !== "all") {
+    const circleGroup = modeId === "major" ? ".fifths-major" : ".fifths-minor";
+    const selectedEl = document.querySelector(`${circleGroup} text[data-key="${tonicSelect.value}"]`);
+    if (selectedEl) selectedEl.setAttribute("data-selected", "true");
+  }
+
   saveState();
 }
 

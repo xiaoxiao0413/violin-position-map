@@ -12,8 +12,8 @@
     <meta property="og:description" content="Interactive violin fingerboard chart for scales, keys, and positions, with a circle of fifths reference.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://xiaoxiao0413.github.io/violin-position-map/">
-    <link rel="stylesheet" href="styles.css?v=20260622-ui2">
-    <script src="app.js?v=20260624-minor1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260624-ui4">
+    <script src="app.js?v=20260624-ui4" defer></script>
   </head>
   <body>
     <main class="app-shell">
@@ -38,32 +38,32 @@
             <circle class="fifths-ring" cx="125" cy="125" r="92" />
             <circle class="fifths-inner-ring" cx="125" cy="125" r="56" />
             <g class="fifths-major">
-              <text x="125" y="17">C</text>
-              <text x="179" y="31">G</text>
-              <text x="219" y="71">D</text>
-              <text x="233" y="125">A</text>
-              <text x="219" y="179">E</text>
-              <text x="179" y="214"><tspan x="179">B</tspan><tspan class="fifths-alt" x="179" dy="11">(C♭)</tspan></text>
-              <text x="125" y="228"><tspan x="125">F♯</tspan><tspan class="fifths-alt" x="125" dy="11">(G♭)</tspan></text>
-              <text x="71" y="214"><tspan x="71">D♭</tspan><tspan class="fifths-alt" x="71" dy="11">(C♯)</tspan></text>
-              <text x="31" y="179">A♭</text>
-              <text x="17" y="125">E♭</text>
-              <text x="31" y="71">B♭</text>
-              <text x="71" y="31">F</text>
+              <text x="125" y="17" data-key="c">C</text>
+              <text x="179" y="31" data-key="g">G</text>
+              <text x="219" y="71" data-key="d">D</text>
+              <text x="233" y="125" data-key="a">A</text>
+              <text x="219" y="179" data-key="e">E</text>
+              <text x="179" y="214" data-key="b"><tspan x="179">B</tspan><tspan class="fifths-alt" x="179" dy="11">(C♭)</tspan></text>
+              <text x="125" y="228" data-key="fs"><tspan x="125">F♯</tspan><tspan class="fifths-alt" x="125" dy="11">(G♭)</tspan></text>
+              <text x="71" y="214" data-key="db"><tspan x="71">D♭</tspan><tspan class="fifths-alt" x="71" dy="11">(C♯)</tspan></text>
+              <text x="31" y="179" data-key="ab">A♭</text>
+              <text x="17" y="125" data-key="eb">E♭</text>
+              <text x="31" y="71" data-key="bb">B♭</text>
+              <text x="71" y="31" data-key="f">F</text>
             </g>
             <g class="fifths-minor">
-              <text x="125" y="53">a</text>
-              <text x="161" y="63">e</text>
-              <text x="187" y="89">b</text>
-              <text x="197" y="125">f♯</text>
-              <text x="187" y="161">c♯</text>
-              <text x="161" y="187">g♯</text>
-              <text x="125" y="193"><tspan x="125">d♯</tspan><tspan class="fifths-alt" x="125" dy="9">(e♭)</tspan></text>
-              <text x="89" y="183"><tspan x="89">b♭</tspan><tspan class="fifths-alt" x="89" dy="9">(a♯)</tspan></text>
-              <text x="63" y="161">f</text>
-              <text x="53" y="125">c</text>
-              <text x="63" y="89">g</text>
-              <text x="89" y="63">d</text>
+              <text x="125" y="53" data-key="a">a</text>
+              <text x="161" y="63" data-key="e">e</text>
+              <text x="187" y="89" data-key="b">b</text>
+              <text x="197" y="125" data-key="fs">f♯</text>
+              <text x="187" y="161" data-key="cs">c♯</text>
+              <text x="161" y="187" data-key="gs">g♯</text>
+              <text x="125" y="193" data-key="ds"><tspan x="125">d♯</tspan><tspan class="fifths-alt" x="125" dy="9">(e♭)</tspan></text>
+              <text x="89" y="183" data-key="bb"><tspan x="89">b♭</tspan><tspan class="fifths-alt" x="89" dy="9">(a♯)</tspan></text>
+              <text x="63" y="161" data-key="f">f</text>
+              <text x="53" y="125" data-key="c">c</text>
+              <text x="63" y="89" data-key="g">g</text>
+              <text x="89" y="63" data-key="d">d</text>
             </g>
             <text class="fifths-center" x="125" y="121" data-i18n="circleCenter">Fifths</text>
             <text class="fifths-center-sub" x="125" y="138" data-i18n="circleSub">Major / minor</text>
