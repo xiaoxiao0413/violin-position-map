@@ -14,8 +14,8 @@
     <meta property="og:description" content="Interactive violin fingerboard chart for scales, keys, and positions, with a circle of fifths reference.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://xiaoxiao0413.github.io/violin-fingerboard-map/">
-    <link rel="stylesheet" href="styles.css?v=20260626-default-cmaj">
-    <script src="app.js?v=20260626-default-cmaj" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260626-ui-polish">
+    <script src="app.js?v=20260626-ui-polish" defer></script>
   </head>
   <body>
     <main class="app-shell">
@@ -24,13 +24,12 @@
         <select id="language" name="language">
           <option value="zh-Hans">简</option>
           <option value="zh-Hant">繁</option>
-          <option value="en" selected>en</option>
+          <option value="en" selected>EN</option>
         </select>
       </label>
 
       <section class="control-panel" aria-labelledby="app-title">
         <div class="brand-block">
-          <p class="eyebrow" data-i18n="brandEyebrow">Violin Fingerboard Chart</p>
           <h1 id="app-title" data-i18n="appTitle">Violin Fingerboard Chart</h1>
         </div>
 
@@ -105,7 +104,6 @@
       <section class="result-panel" aria-live="polite">
         <div class="result-head">
           <div>
-            <p class="eyebrow" data-i18n="chartsEyebrow">Results</p>
             <h2 id="result-title">All Keys · Major</h2>
           </div>
         </div>
