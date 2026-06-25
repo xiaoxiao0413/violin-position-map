@@ -239,13 +239,8 @@ function updateStaticText() {
   lightbox.querySelector(".lightbox-close")?.setAttribute("aria-label", dict.close);
 }
 
-function fillPositionOptions(preferredValue = "all") {
+function fillPositionOptions(preferredValue = "1") {
   positionSelect.replaceChildren();
-
-  const allOption = document.createElement("option");
-  allOption.value = "all";
-  allOption.textContent = t("allPositions");
-  positionSelect.append(allOption);
 
   for (const position of POSITIONS) {
     const option = document.createElement("option");
@@ -254,7 +249,7 @@ function fillPositionOptions(preferredValue = "all") {
     positionSelect.append(option);
   }
 
-  positionSelect.value = POSITIONS.some((position) => position.id === preferredValue) ? preferredValue : "all";
+  positionSelect.value = POSITIONS.some((position) => position.id === preferredValue) ? preferredValue : "1";
 }
 
 function getPositionFilter() {
@@ -319,14 +314,9 @@ function keyDisplayLabel(key, modeId) {
   return t("keyLabel")(key, keySignatureText(key, modeId));
 }
 
-function fillTonicOptions(modeId, preferredValue = "all") {
+function fillTonicOptions(modeId, preferredValue) {
   const keys = MODES[modeId].keys;
   tonicSelect.replaceChildren();
-
-  const allOption = document.createElement("option");
-  allOption.value = "all";
-  allOption.textContent = t("allKeys");
-  tonicSelect.append(allOption);
 
   for (const key of keys) {
     const option = document.createElement("option");
@@ -335,7 +325,7 @@ function fillTonicOptions(modeId, preferredValue = "all") {
     tonicSelect.append(option);
   }
 
-  tonicSelect.value = preferredValue === "all" || keys.some((key) => key.id === preferredValue) ? preferredValue : "all";
+  tonicSelect.value = keys.some((key) => key.id === preferredValue) ? preferredValue : keys[0].id;
 }
 
 function loadSavedState() {
@@ -348,9 +338,9 @@ function loadSavedState() {
     return {
       lang: I18N[saved.lang] ? saved.lang : DEFAULT_LANG,
       mode: modeId,
-      // 主音/把位不持久化，每次打开页面都固定为「全部调 · 全部把位」
-      tonic: "all",
-      position: "all",
+      // 主音/把位不持久化，每次打开页面都固定为默认值（大调 C · 第一把位）
+      tonic: modeId === "minor" ? MODES.minor.keys[0].id : "c",
+      position: "1",
     };
   } catch {
     return null;
@@ -569,9 +559,7 @@ function render() {
   const positionFilter = getPositionFilter();
   const positionSuffix = positionFilter ? t("positionSuffix")(positionFilter) : "";
 
-  resultTitle.textContent = (tonicSelect.value === "all"
-    ? `${t("allKeys")} · ${modeLabel(modeId)}`
-    : `${keys[0] ? keyDisplayLabel(keys[0], modeId) : ""} ${modeLabel(modeId)}`) + positionSuffix;
+  resultTitle.textContent = `${keys[0] ? keyDisplayLabel(keys[0], modeId) : ""} ${modeLabel(modeId)}` + positionSuffix;
   results.dataset.layout = keys.length === 1 ? "single" : "multi";
   results.replaceChildren(...keys.map((key, index) => makeCard(key, index, mode, maxSemitone, scaleLength)));
 
@@ -614,8 +602,8 @@ filters.addEventListener("submit", (event) => {
 resetButton.addEventListener("click", () => {
   filters.elements.mode.value = "major";
   updateStaticText();
-  fillTonicOptions("major", "all");
-  fillPositionOptions("all");
+  fillTonicOptions("major", "c");
+  fillPositionOptions("1");
   render();
 });
 
@@ -629,8 +617,8 @@ if (saved) {
 } else {
   languageSelect.value = DEFAULT_LANG;
   updateStaticText();
-  fillTonicOptions("major", "all");
-  fillPositionOptions("all");
+  fillTonicOptions("major", "c");
+  fillPositionOptions("1");
 }
 
 render();
