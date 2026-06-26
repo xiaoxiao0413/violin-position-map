@@ -48,14 +48,9 @@ body {
     linear-gradient(155deg, #f1e2c4 0%, #e7d4af 55%, #efe0c0 100%);
   background-size: auto, 140% 140%, 140% 140%, auto;
   background-position: 0 0, 0% 0%, 100% 0%, 0 0;
-  animation: drift-blobs 30s ease-in-out infinite alternate;
   font-family: var(--font-sans);
 }
 
-@keyframes drift-blobs {
-  0%   { background-position: 0 0, 0%  0%,  100% 0%, 0 0; }
-  100% { background-position: 0 0, 7% 12%,  90% 16%, 0 0; }
-}
 
 button,
 select,
@@ -128,9 +123,11 @@ select {
 /* ─── Layout Shell ───────────────────────────────────────────── */
 .app-shell {
   display: grid;
-  grid-template-columns: minmax(270px, 350px) minmax(0, 1fr);
-  gap: 20px;
-  width: min(1440px, calc(100% - 32px));
+  grid-template-columns: minmax(290px, 340px) minmax(620px, 820px);
+  align-items: stretch;
+  justify-content: center;
+  gap: 22px;
+  width: min(1200px, calc(100% - 32px));
   min-height: 100vh;
   margin: 0 auto;
   padding: 18px 0;
@@ -169,11 +166,12 @@ select {
 /* ─── Control Panel ──────────────────────────────────────────── */
 .control-panel {
   position: sticky;
-  top: 16px;
-  align-self: start;
+  top: 18px;
+  align-self: stretch;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-height: calc(100vh - 36px);
   padding: 22px;
 }
 
@@ -204,6 +202,7 @@ select {
   content: "♫";
   animation: note-float 4s ease-in-out infinite 1.2s;
 }
+
 
 @keyframes note-float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -242,6 +241,7 @@ h1 {
   -webkit-text-fill-color: transparent;
   animation: title-shine 9s ease-in-out infinite alternate;
 }
+
 
 @keyframes title-shine {
   0%   { background-position: 0% 50%; }
@@ -510,6 +510,7 @@ input[type="number"]:focus {
   flex-direction: column;
   gap: 18px;
   min-width: 0;
+  min-height: calc(100vh - 36px);
   padding: 22px;
 }
 
@@ -552,11 +553,13 @@ input[type="number"]:focus {
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 18px;
   align-items: start;
+  flex: 1;
 }
 
 .diagram-grid[data-layout="single"] {
-  grid-template-columns: minmax(290px, 500px);
+  grid-template-columns: minmax(560px, 760px);
   justify-content: center;
+  align-content: center;
 }
 
 /* 单图布局：去掉多余的卡片包装，避免与结果面板形成「框中框」 */
@@ -583,6 +586,8 @@ input[type="number"]:focus {
 }
 
 .diagram-grid[data-layout="single"] .fingerboard-media {
+  align-items: center;
+  min-height: min(62vh, 620px);
   padding-left: 0;
   padding-right: 0;
 }
@@ -726,10 +731,9 @@ input[type="number"]:focus {
 
 .fingerboard-svg {
   display: block;
-  width: auto;
+  width: min(100%, 700px);
   height: auto;
-  max-width: min(100%, 430px);
-  max-height: 72vh;
+  max-height: calc(100vh - 190px);
   border-radius: 8px;
   filter: drop-shadow(0 8px 18px rgba(20, 10, 4, 0.12));
 }
@@ -974,7 +978,12 @@ h3 {
 }
 
 /* ─── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
+  .app-shell {
+    grid-template-columns: minmax(260px, 330px) minmax(0, 1fr);
+    width: min(100% - 32px, 1120px);
+  }
+
   .control-panel {
     position: static;
   }
@@ -998,6 +1007,7 @@ h3 {
 
   .control-panel,
   .result-panel {
+    min-height: auto;
     padding: 18px;
   }
 
@@ -1027,7 +1037,8 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .diagram-media {
+  .diagram-media,
+  .diagram-grid[data-layout="single"] .fingerboard-media {
     min-height: 340px;
   }
 
