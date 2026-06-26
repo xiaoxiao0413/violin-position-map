@@ -472,7 +472,6 @@ function makeFingerboardSvg(key, keyIndex, mode, maxSemitone, scaleLength) {
     });
   }
 
-  parts.push(`<text x="28" y="28" font-size="18" font-weight="900" fill="#16202a">${escapeXml(`${keyDisplayLabel(key, modeId)} ${modeLabel(modeId)}`)}</text>`);
   parts.push("</svg>");
   return parts.join("");
 }
@@ -488,9 +487,6 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
 
   const header = document.createElement("div");
   header.className = "formula-card-head";
-
-  const title = document.createElement("h3");
-  title.textContent = `${keyDisplayLabel(key, modeId)} ${modeLabel(modeId)}`;
 
   const scaleLine = document.createElement("p");
   scaleLine.className = "scale-notes";
@@ -516,7 +512,7 @@ function makeCard(key, keyIndex, mode, maxSemitone, scaleLength) {
     }
   });
 
-  header.append(title, scaleLine);
+  header.append(scaleLine);
   card.append(header, media);
   return card;
 }
