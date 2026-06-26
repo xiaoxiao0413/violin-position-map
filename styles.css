@@ -559,6 +559,34 @@ input[type="number"]:focus {
   justify-content: center;
 }
 
+/* 单图布局：去掉多余的卡片包装，避免与结果面板形成「框中框」 */
+.diagram-grid[data-layout="single"] .diagram-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.diagram-grid[data-layout="single"] .diagram-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.diagram-grid[data-layout="single"] .formula-card-head {
+  padding: 0 0 12px;
+  background: none;
+  border-bottom: 0;
+}
+
+.diagram-grid[data-layout="single"] .formula-card-head::after {
+  content: none;
+}
+
+.diagram-grid[data-layout="single"] .fingerboard-media {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* ─── Diagram Card ───────────────────────────────────────────── */
 .diagram-card {
   min-width: 0;
